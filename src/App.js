@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import person from './Person/Person';
 import Person from './Person/Person'
 
 class App extends Component {
@@ -43,28 +44,30 @@ class App extends Component {
       padding: '8px',
       cursor: 'pointer'
     }
+    let persons = null;
+    if (this.state.showPersons) {
+      persons = (<div>
+        <Person
+          name={this.state.persons[0].name}
+          age={this.state.persons[0].age}
+        />
+        <Person
+          name={this.state.persons[1].name}
+          age={this.state.persons[1].age}
+          click={this.switchNameHandler.bind(this, 'Ayush')}
+          change={this.inputHandler}>
+          My Hobbies: Listening songs
+      </Person>
+        <Person
+          name={this.state.persons[2].name}
+          age={this.state.persons[2].age} />
+      </div>)
+    }
     return (
       <div className="App">
         <h1>I am React app</h1>
-        <button style={style} onClick={this.togglePersonsHandler}>Switch Name</button>
-        {
-          this.state.showPersons ? <div>
-            <Person
-              name={this.state.persons[0].name}
-              age={this.state.persons[0].age}
-            />
-            <Person
-              name={this.state.persons[1].name}
-              age={this.state.persons[1].age}
-              click={this.switchNameHandler.bind(this, 'Ayush')}
-              change={this.inputHandler}>
-              My Hobbies: Listening songs
-          </Person>
-            <Person
-              name={this.state.persons[2].name}
-              age={this.state.persons[2].age} />
-          </div> : null
-        }
+        <button style={style} onClick={this.togglePersonsHandler}>Toggle Persons</button>
+        {persons}
       </div>
     );
 
